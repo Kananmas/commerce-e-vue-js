@@ -1,10 +1,40 @@
 <script>
+import SideBar from "../../../../components/SideBar/index.vue"
 export default {
-
+    data() {
+        return {
+            currentWidth: window.innerWidth,
+            openMenu: false,
+        }
+    },
+    methods: {
+        handleOnClickMenu() {
+            this.openMenu = !this.openMenu;
+            this.checkScreen();
+        },
+        checkScreen() {
+            if (this.currentWidth != window.innerWidth)
+                this.currentWidth = window.innerWidth;
+        }
+    },
+    computed: {
+        isSmallScreen() {
+            return this.currentWidth <= 600;
+        }
+    },
+    components: {
+        SideBar
+    }
 }
 </script>
 
 <template>
+    <SideBar :isOpen="openMenu" :extra="isSmallScreen">
+        <div class="link"><a><strong>Collections</strong></a></div>
+        <div class="link"><a><strong>Brands</strong></a></div>
+        <div class="link"><a><strong>Sales</strong></a></div>
+        <div class="link"><a><strong>New</strong></a></div>
+    </SideBar>
     <header>
         <div class="row">
             <div class="col header-icon">
@@ -18,7 +48,7 @@ export default {
                 <a>New</a>
             </div>
             <div class="col buttons">
-                <button class="btn btn-warning">menu</button>
+                <button @click="handleOnClickMenu" class="btn btn-warning">menu</button>
                 <button class="btn btn-warning mx-2">🛒</button>
             </div>
         </div>
