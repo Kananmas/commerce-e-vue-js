@@ -1,14 +1,10 @@
 <script setup>
-import Header from "./components/Header/index.vue"
 import Footer from "./components/Footer/index.vue"
 </script>
 
 <template>
-    <Header />
     <div class="row main">
-        <div class="col image">
-
-        </div>
+        <img class="col image" src="./assets/shopping-lady.png" />
         <div class="col offset-2 content">
             <h1 class="main-title">Fashion Up Your <br />
                 Look</h1>
@@ -76,13 +72,6 @@ import Footer from "./components/Footer/index.vue"
     padding: 14%;
 }
 
-.image {
-    background-image: url(./assets/shopping-lady.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 408px;
-    height: 612px;
-}
 
 .content {
     float: left;
@@ -126,9 +115,10 @@ import Footer from "./components/Footer/index.vue"
 }
 
 
-@media (max-width:600px) {
+@media (max-width:800px) {
     .main {
-        margin: 5% 15%;
+        margin: 0% 15%;
+        margin-bottom: 10%;
     }
 
     .content {
@@ -138,6 +128,16 @@ import Footer from "./components/Footer/index.vue"
 
     .image {
         display: none;
+    }
+
+    .box {
+        text-align: start;
+        float: left;
+        color: white;
+        margin-top: 14px;
+        margin-left: 16% auto 25%;
+        width: 0;
+        height: 0;
     }
 
 
