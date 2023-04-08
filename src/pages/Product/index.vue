@@ -1,8 +1,9 @@
 <script setup>
 import Card from "../../components/Card/index.vue"
+import { fetchFrom } from "../../components/Vitrine/utils/fech-from.utils";
 import { ref } from "vue";
 
-let  product = null;
+let product = null;
 
 if (!product) {
     const stored = sessionStorage.getItem("product");
@@ -10,24 +11,74 @@ if (!product) {
         product = JSON.parse(stored);
     }
 }
-const { title, description, price, images } = product;
+const { title, description, price } = product;
 
 let otherProducts = ref([]);
-fetch("https://dummyjson.com/products/category/" + product.category).then(res => res.json()).then(res => {
-    otherProducts.value = res.products.filter((Cproduct) => Cproduct.title !== product.title);
-});
+
+if (product.images) {
+    fetchFrom("https://dummyjson.com/products/category/" + product.category, res => {
+        otherProducts.value = res.products.filter((Cproduct) => Cproduct.title !== product.title);
+    });
+}
+
+else {
+    fetchFrom(`https://fakestoreapi.com/products/category/${product.category}`, res => {
+        res.forEach(i => {
+            const img = i.image;
+            delete i.image;
+            i.images = [, , , , img];
+            i.rating = i.rating.rate;
+        })
+        otherProducts.value = res.filter((Cproduct) => Cproduct.title !== product.title);
+    });
+}
+
+function handleClickAddToShoppingCard() {
+    let shoppingCard = sessionStorage.getItem('shoppingCard');
+
+    if (!shoppingCard) {
+        shoppingCard = [];
+    }
+    else {
+        shoppingCard = JSON.parse(shoppingCard);
+    }
+    shoppingCard.push(product);
+    sessionStorage.setItem('shoppingCard', JSON.stringify(shoppingCard));
+}
+
+
+function findImage(product) {
+    if (!product.images) {
+        return product.image;
+    }
+    return product.images[0]
+}
+
+function getRating(product) {
+    if (typeof product.rating == 'object') {
+        return product.rating.rate;
+    }
+    return product.rating;
+}
 
 </script>
 
 <template>
     <div v-if="product" class="product-slot">
-        <img :src="images[0]" />
-        <h1>{{ title }}</h1>
-        <p>{{ description }} Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magnam mollitia culpa itaque ullam
-            nihil dignissimos corporis laborum quibusdam unde, totam quasi eum officia quidem earum sunt, cupiditate, beatae
-            soluta facilis.</p>
-        <kbd>Rating: {{ product.rating }}</kbd>
-        <h5>Price: {{ price }}$</h5>
+        <img :src="findImage(product)" />
+        <div class="text-content">
+            <h1>{{ title }}</h1>
+            <p>{{ description }} Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magnam mollitia culpa itaque
+                ullam
+                nihil dignissimos corporis laborum quibusdam unde, totam quasi eum officia quidem earum sunt, cupiditate,
+                beatae
+                soluta facilis.</p>
+            <kbd>Rating: {{ getRating(product) }}</kbd>
+            <h5>Price: {{ price }}$</h5>
+
+            <button class="btn btn-success" @click="handleClickAddToShoppingCard">Add To Shoping Card</button>
+        </div>
+
     </div>
     <div class="other-products">
         <h4>See Also</h4>
@@ -38,52 +89,84 @@ fetch("https://dummyjson.com/products/category/" + product.category).then(res =>
 
 
 <style scoped>
+.card {
+    width: 500px;
+    float: left;
+    margin: 0 3rem;
+}
 
-@media (max-width: 800px) {
-    img {
-    max-width: 400px;
+.card img {
+    width: 200px;
+    height: 200px;
+}
+
+.text-content {
+    margin-left: 4%;
+    margin-top: 2%;
+    width: 800px;
+    float: left;
 }
 
 .product-slot {
-    padding: 2%;
+    height: 50vh;
+}
+
+.product-slot img {
+    float: left;
+    width: 300px;
+    height: 400px;
 }
 
 .other-products {
-    margin-top: 12%;
+    padding: 2%;
+    margin-top: 2%;
     border-top: 3px solid black;
 }
 
-.other-products h4 {
-    text-align: center;
-    margin-top: 4%;
-}
+@media (max-width: 800px) {
+    img {
+        max-width: 400px;
+    }
 
-.card {
-    padding: 2%;
-    margin: 2%;
-}
+    .product-slot {
+        padding: 2%;
+    }
 
-p {
-    border: 1px solid silver;
-    padding: 4%;
-    border-radius: 13px;
-}
+    .other-products {
+        margin-top: 12%;
+        border-top: 3px solid black;
+    }
 
-h1 {
-    border-bottom: 3px solid black;
-    padding: 1%;
-}
+    .other-products h4 {
+        text-align: center;
+        margin-top: 4%;
+    }
 
-kbd {
-    float: left;
-    display: inline;
-}
+    .card {
+        padding: 2%;
+        margin: 2%;
+    }
 
-h5 {
-    float: left;
-    margin-left: 14px;
-}
+    p {
+        border: 1px solid silver;
+        padding: 4%;
+        border-radius: 13px;
+    }
+
+    h1 {
+        border-bottom: 3px solid black;
+        padding: 1%;
+    }
+
+    kbd {
+        float: left;
+        display: inline;
+    }
+
+    h5 {
+        float: left;
+        margin-left: 14px;
+    }
 
 }
-
 </style>

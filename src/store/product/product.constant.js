@@ -1,1 +1,0 @@
-export const SELECT_A_PRODUCT = "SELECT_A_PRODUCT";

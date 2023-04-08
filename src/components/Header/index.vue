@@ -1,12 +1,11 @@
 <script>
-import { ConstantTypes } from "@vue/compiler-core";
 import SideBar from "./components/SideBar/index.vue"
 export default {
     data() {
         return {
             currentWidth: window.innerWidth,
             openMenu: false,
-            links :[
+            links: [
                 'Collections',
                 'Brands',
                 'Sales',
@@ -15,7 +14,7 @@ export default {
         }
     },
     methods: {
-        handleOnClickMenu() {   
+        handleOnClickMenu() {
             this.openMenu = !this.openMenu;
             this.checkScreen();
         },
@@ -24,7 +23,7 @@ export default {
                 this.currentWidth = window.innerWidth;
         },
         goToRoute(link) {
-            if(link == 'Collections'|| link == 'Brands') {
+            if (link == 'Collections' || link == 'Brands') {
                 link = link + '/:id';
             }
             const route = `/${link}`.toLowerCase();
@@ -33,6 +32,10 @@ export default {
         },
         goToHome() {
             this.$router.push("/");
+        },
+        goToShoppingCard() {
+            console.log('here')
+            this.$router.push("/shoppingcard");
         }
     },
     computed: {
@@ -48,7 +51,7 @@ export default {
 
 <template>
     <SideBar :isOpen="openMenu" :extra="isSmallScreen" @click-close="handleOnClickMenu">
-        <div class="link" v-for="link in links" @click="goToRoute(link)"><a ><strong>{{ link }}</strong></a></div>
+        <div class="link" v-for="link in links" @click="goToRoute(link)"><a><strong>{{ link }}</strong></a></div>
     </SideBar>
     <header>
         <div class="row">
@@ -57,11 +60,11 @@ export default {
                 <h4>Amazon</h4>
             </div>
             <div class="col offset header-links ">
-                <a  v-for="link in links" @click="goToRoute(link)">{{ link }}</a>
+                <a v-for="link in links" @click="goToRoute(link)">{{ link }}</a>
             </div>
             <div class="col buttons">
                 <button @click="handleOnClickMenu" class="btn btn-warning">menu</button>
-                <button class="btn btn-warning mx-2">🛒</button>
+                <button class="btn btn-warning mx-2" @click="goToShoppingCard">🛒</button>
             </div>
         </div>
     </header>
@@ -118,6 +121,6 @@ header {
         display: none;
     }
 
-    
+
 }
 </style>
