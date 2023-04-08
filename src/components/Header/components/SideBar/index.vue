@@ -161,4 +161,12 @@ export default {
         }
     }
 }
+
+@media (min-height:1000px) {
+    .menu {
+        margin: 0%;
+        position: sticky;
+        left: 80%;
+    }
+}
 </style>

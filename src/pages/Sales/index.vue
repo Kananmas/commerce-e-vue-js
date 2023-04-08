@@ -32,9 +32,9 @@ export default {
 </template>
 
 
-<style scoped>
+<style>
 .sales {
-    margin: 0% 12%;
+    margin: 0% 12% auto 24%;
 }
 
 .card {

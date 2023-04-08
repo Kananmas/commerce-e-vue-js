@@ -1,6 +1,8 @@
 <script setup>
 import Card from "../../components/Card/index.vue"
-import { fetchFrom } from "../../components/Vitrine/utils/fech-from.utils";
+import ListGroup from "./components/ListGroup/index.vue"
+import ListGroupItem from "./components/ListGroupItem/index.vue"
+import { fetchFrom } from "../../utils/fech-from.utils";
 import { ref } from "vue";
 
 let product = null;
@@ -73,59 +75,95 @@ function getRating(product) {
                 nihil dignissimos corporis laborum quibusdam unde, totam quasi eum officia quidem earum sunt, cupiditate,
                 beatae
                 soluta facilis.</p>
-            <kbd>Rating: {{ getRating(product) }}</kbd>
-            <h5>Price: {{ price }}$</h5>
-
             <button class="btn btn-success" @click="handleClickAddToShoppingCard">Add To Shoping Card</button>
         </div>
+        <div class="rating-display">
+            <kbd>Rating: {{ getRating(product) + `⭐` }}</kbd>
+            <h5>Price: {{ price }}$</h5>
+        </div>
+
+        <ListGroup>
+            <ListGroupItem title="Rating:" :value="getRating(product) + `⭐`" />
+            <ListGroupItem title="Price:" :value="price" />
+            <ListGroupItem title="Category:" :value="product.category" />
+            <ListGroupItem title="Discount:" :value="product.discountPercentage || 0" />
+        </ListGroup>
 
     </div>
     <div class="other-products">
         <h4>See Also</h4>
-        <Card v-for="product in otherProducts" :rating="product.rating" :price="product.price" :title="product.title"
-            :img="product.images[4]" :text="product.description" :product="product" />
+        <div class="cards">
+            <Card v-for="product in otherProducts" :rating="product.rating" :price="product.price" :title="product.title"
+                :img="product.images[4]" :text="product.description" :product="product" />
+        </div>
+
     </div>
 </template>
 
 
 <style scoped>
-.card {
-    width: 500px;
-    float: left;
-    margin: 0 3rem;
-}
+@media (min-width:801px) {
+    .card {
+        display: inline;
+        width: 500px;
+        height: fit-content;
+        float: left;
+        margin: 0 1rem;
+    }
 
-.card img {
-    width: 200px;
-    height: 200px;
-}
+    .rating-display {
+        display: none;
+    }
 
-.text-content {
-    margin-left: 4%;
-    margin-top: 2%;
-    width: 800px;
-    float: left;
-}
+    .cards {
+        display: flex;
+    }
 
-.product-slot {
-    height: 50vh;
-}
+    .card img {
+        width: 200px;
+        height: 200px;
+    }
 
-.product-slot img {
-    float: left;
-    width: 300px;
-    height: 400px;
-}
+    .text-content {
+        margin: 2% 4%;
+        width: 800px;
+        float: left;
+    }
 
-.other-products {
-    padding: 2%;
-    margin-top: 2%;
-    border-top: 3px solid black;
+    .product-slot {
+        height: 50vh;
+    }
+
+    .product-slot img {
+        margin-left: 4%;
+        float: left;
+        width: 300px;
+        height: 400px;
+    }
+
+    .other-products {
+        padding: 2%;
+        margin-top: 2%;
+        border-top: 3px solid black;
+    }
+
+    .other-products h4 {
+        margin-bottom: 2%;
+    }
+
 }
 
 @media (max-width: 800px) {
     img {
-        max-width: 400px;
+        max-width: 350px;
+    }
+
+    .card {
+        display: block;
+    }
+
+    .list-group {
+        display: none;
     }
 
     .product-slot {
@@ -146,6 +184,11 @@ function getRating(product) {
         padding: 2%;
         margin: 2%;
     }
+
+    .rating-display {
+        margin-top: 2%;
+    }
+
 
     p {
         border: 1px solid silver;

@@ -6,7 +6,7 @@ import MenuIcon from "../../components/MenuIcon/index.vue"
 
 import { randomString } from "../../utils/random-string.util"
 import { toPascalCase } from "./utils/to-pascal-case.util"
-import { fetchFrom } from "./utils/fech-from.utils"
+import { fetchFrom } from "../../utils/fech-from.utils"
 
 export default {
     data() {
@@ -157,13 +157,15 @@ export default {
 
         <div v-if="isSmallScreen && !isOpen">
             <Card :key="randomString" v-for="product in showingProducts" className="my-2 mx-2" :rating="product.rating"
-                :price="product.price" :title="product.title" :img="product.images[4]" :text="product.description" :product="product" />
+                :price="product.price" :title="product.title" :img="product.images[4]" :text="product.description"
+                :product="product" />
         </div>
 
         <div class="list" v-else-if="!isSmallScreen">
             <div class="row">
                 <Card :key="randomString" :rating="product.rating" v-for="product in showingProducts" :price="product.price"
-                    className="col mx-2" :title="product.title" :img="product.images[4]" :text="product.description" :product="product"/>
+                    className="col mx-2" :title="product.title" :img="product.images[4]" :text="product.description"
+                    :product="product" />
             </div>
 
         </div>
