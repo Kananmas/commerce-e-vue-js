@@ -54,7 +54,7 @@ export default {
 <style >
 .menu {
     overflow-y: hidden;
-    height: 102.5vh;
+    height: 103.5vh;
     background-color: white;
     float: right;
     border-left: 1px solid grey;
@@ -132,7 +132,7 @@ export default {
     }
 
     100% {
-        width: 400px;
+        width: 200px;
     }
 }
 

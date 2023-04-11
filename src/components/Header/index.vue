@@ -1,123 +1,125 @@
 <script>
-import SideBar from "./components/SideBar/index.vue"
+import SideBar from "./components/SideBar/index.vue";
 export default {
-    data() {
-        return {
-            currentWidth: window.innerWidth,
-            openMenu: false,
-            links: [
-                'Collections',
-                'Brands',
-                'Sales',
-                'New'
-            ]
-        }
+  data() {
+    return {
+      currentWidth: window.innerWidth,
+      openMenu: false,
+      links: ["Collections", "Brands", "Sales", "New"],
+    };
+  },
+  methods: {
+    handleOnClickMenu() {
+      this.openMenu = !this.openMenu;
+      this.checkScreen();
     },
-    methods: {
-        handleOnClickMenu() {
-            this.openMenu = !this.openMenu;
-            this.checkScreen();
-        },
-        checkScreen() {
-            if (this.currentWidth != window.innerWidth)
-                this.currentWidth = window.innerWidth;
-        },
-        goToRoute(link) {
-            const route = `/${link}`.toLowerCase();
+    checkScreen() {
+      if (this.currentWidth != window.innerWidth) this.currentWidth = window.innerWidth;
+    },
+    goToRoute(link) {
+      const route = `/${link}`.toLowerCase();
 
-            this.$router.push(route);
-        },
-        goToHome() {
-            this.$router.push("/");
-        },
-        goToShoppingCard() {
-            console.log('here')
-            this.$router.push("/shoppingcard");
-        }
+      this.$router.push(route);
     },
-    computed: {
-        isSmallScreen() {
-            return this.currentWidth <= 800;
-        }
+    goToHome() {
+      this.$router.push("/");
     },
-    components: {
-        SideBar,
-    }
-}
+    goToShoppingCard() {
+      console.log("here");
+      this.$router.push("/shoppingcard");
+    },
+  },
+  computed: {
+    isSmallScreen() {
+      return this.currentWidth <= 800;
+    },
+  },
+  components: {
+    SideBar,
+  },
+};
 </script>
 
 <template>
+  <div class="header-container">
     <SideBar :isOpen="openMenu" :extra="isSmallScreen" @click-close="handleOnClickMenu">
-        <div class="link" v-for="link in links" @click="goToRoute(link)"><a><strong>{{ link }}</strong></a></div>
+      <div class="link" v-for="link in links" @click="goToRoute(link)">
+        <a
+          ><strong>{{ link }}</strong></a
+        >
+      </div>
     </SideBar>
     <header>
-        <div class="row">
-            <div class="col header-icon" @click="goToHome">
-                <div class="icon"></div>
-                <h4>Amazon</h4>
-            </div>
-            <div class="col offset header-links ">
-                <a v-for="link in links" @click="goToRoute(link)">{{ link }}</a>
-            </div>
-            <div class="col buttons">
-                <button @click="handleOnClickMenu" class="btn btn-warning">menu</button>
-                <button class="btn btn-warning mx-2" @click="goToShoppingCard">🛒</button>
-            </div>
+      <div class="row">
+        <div class="col header-icon" @click="goToHome">
+          <div class="icon"></div>
+          <h4>Amazon</h4>
         </div>
+        <div class="col offset header-links">
+          <a v-for="link in links" @click="goToRoute(link)">{{ link }}</a>
+        </div>
+        <div class="col buttons">
+          <button @click="handleOnClickMenu" class="btn btn-warning">menu</button>
+          <button class="btn btn-warning mx-2" @click="goToShoppingCard">🛒</button>
+        </div>
+      </div>
     </header>
-    <router-view></router-view>
-</template>
+  </div>
 
+  <router-view></router-view>
+</template>
 
 <style scoped>
 header {
-    padding: 24px;
-    width: 100%;
-    text-align: center;
+  padding: 24px;
+  width: 100%;
+  text-align: center;
+  background-color:white;
+}
+
+.header-container {
+    position:sticky;
+    top:0%
 }
 
 .header-icon {
-    text-align: left;
+  text-align: left;
 }
 
 .header-links {
-    text-align: left;
-
+  text-align: left;
 }
 
 .header-links a {
-    padding: 2% 0%;
-    padding-right: 14%;
+  padding: 2% 0%;
+  padding-right: 14%;
 }
 
 .header-links a:hover {
-    text-align: center;
-    animation: scaleup;
-    animation-duration: 0.15s;
-    animation-fill-mode: forwards;
-    border-bottom: 4px solid orange;
+  text-align: center;
+  animation: scaleup;
+  animation-duration: 0.15s;
+  animation-fill-mode: forwards;
+  border-bottom: 4px solid orange;
 }
 
 @keyframes scaleup {
-    0% {
-        font-size: 16px;
-    }
+  0% {
+    font-size: 16px;
+  }
 
-    100% {
-        font-size: 20px;
-    }
+  100% {
+    font-size: 20px;
+  }
 }
 
 .buttons {
-    text-align: right;
+  text-align: right;
 }
 
-
-@media (max-width:800px) {
-    .header-links {
-        display: none;
-    }
-
-
+@media (max-width: 800px) {
+  .header-links {
+    display: none;
+  }
 }
 </style>

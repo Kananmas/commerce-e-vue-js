@@ -29,11 +29,14 @@ function getRating(product) {
 }
 
 function handleClickAddToShoppingCard() {
-  let boughtProducts = sessionStorage.getItem("shoppingCard")
+  let boughtProducts = JSON.parse(sessionStorage.getItem("shoppingCard"));
+  let isEmpty = !!boughtProducts;
   let shoppingCard = [];
 
-  if (!!!boughtProducts) {
-    shoppigCard = JSON.parse(boughtProducts);
+  if (!!boughtProducts) {
+    if (boughtProducts.length) {
+      shoppingCard = boughtProducts;
+    }
   }
 
   shoppingCard.push(product.value);
@@ -70,7 +73,7 @@ function goToProduct(newProduct) {
 
     <ListGroup>
       <ListGroupItem title="Rating:" :value="getRating(product) + `⭐`" />
-      <ListGroupItem title="Price:" :value="product.price+`$`" />
+      <ListGroupItem title="Price:" :value="product.price + `$`" />
       <ListGroupItem title="Category:" :value="product.category" />
       <ListGroupItem title="Discount:" :value="product.discountPercentage || 0" />
     </ListGroup>

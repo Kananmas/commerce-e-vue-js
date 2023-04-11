@@ -67,7 +67,7 @@ export default {
 
 <style scoped>
 .section {
-    width: 50%;
+    width: 50% ;
     margin-left: 25%;
 
 }

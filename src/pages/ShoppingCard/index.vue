@@ -1,10 +1,11 @@
 <script setup>
 let shoppingCard = JSON.parse(sessionStorage.getItem("shoppingCard"));
+
 const Today = new Date().toDateString();
 </script>
 
-<template>
-  <div v-if="shoppigCard">
+<template v-if="shoppigCard.length">
+  <div class="container">
     <h1>Purchesed</h1>
     <table class="table table-bordered table-striped table-hover tb">
       <thead>
@@ -53,7 +54,6 @@ const Today = new Date().toDateString();
       </table>
     </div>
   </div>
-  <h1 v-else>Sorry you haven't pick anything yet</h1>
 </template>
 
 <style scoped>
@@ -63,7 +63,7 @@ const Today = new Date().toDateString();
 
 .tb {
   text-align: start;
-  margin: 2% 20%;
+  margin: 2% 22%;
   max-width: 55%;
 }
 
