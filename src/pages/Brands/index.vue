@@ -27,7 +27,7 @@ export default {
     },
     methods: {
         goToCollection(collection) {
-            this.$router.push("/collections/:id/" + collection);
+            this.$router.push("/vitrine");
         }
     },
     computed: {

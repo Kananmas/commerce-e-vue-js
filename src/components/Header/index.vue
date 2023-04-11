@@ -23,9 +23,6 @@ export default {
                 this.currentWidth = window.innerWidth;
         },
         goToRoute(link) {
-            if (link == 'Collections' || link == 'Brands') {
-                link = link + '/:id';
-            }
             const route = `/${link}`.toLowerCase();
 
             this.$router.push(route);

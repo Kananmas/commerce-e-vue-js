@@ -2,27 +2,20 @@
 
 export default {
     props: ['className', 'title', 'text', 'img', 'rating', 'price' ,'product'],
+    emits: ['go-to-products'],
     data() {
         return {
             
         }
     },
     methods : { 
-        goToProduct() {
-            console.log(`here`)
-            sessionStorage.setItem('product',JSON.stringify(this.product))
-            this.$router.push('/product');
-            if(this.$route.fullPath.includes('/product')) {
-              
-                this.$router.go();
-            }
-        }
+        
     }
 }
 </script>
 
 <template>
-    <div :class="`card ` + this.className" @click="goToProduct">
+    <div :class="`card ` + this.className" @click="$emit('go-to-products')">
         <img class="card-img" :src="this.img" :alt="this.title">
         <div class="card-body">
             <div class="h5 card-title">{{ this.title }}</div>
@@ -35,3 +28,11 @@ export default {
     </div>
 </template>
 
+
+<style>
+.card-img {
+    height:400px;
+    padding:2%
+}
+
+</style>

@@ -25,34 +25,9 @@ const routes = [
       { path: "/product", component: Product },
       { path: "/shoppingcard", component: ShoppingCard },
       { path: "/sales", component: Sales },
-      {
-        path: "/brands/:id",
-        children: [
-          { path: "", component: Brands },
-          { path: "adidas", component: Vitrine },
-          { path: "puma", component: Vitrine },
-          { path: "nike", component: Vitrine },
-          { path: "thendorthface", component: Vitrine },
-          { path: "unerarmmor", component: Vitrine },
-          { path: "reebook", component: Vitrine },
-          { path: "newbalance", component: Vitrine },
-          { path: "filla", component: Vitrine },
-        ],
-      },
-      {
-        path: "/collections/:id",
-        children: [
-          { path: "", component: Collections },
-          { path: "adidas", component: Vitrine },
-          { path: "puma", component: Vitrine },
-          { path: "nike", component: Vitrine },
-          { path: "thennorthface", component: Vitrine },
-          { path: "underarmmor", component: Vitrine },
-          { path: "reebook", component: Vitrine },
-          { path: "newbalance", component: Vitrine },
-          { path: "filla", component: Vitrine },
-        ],
-      },
+      { path: "/brands", component: Brands },
+      { path: "/collections",component: Collections},
+      { path: "/vitrine", component:Vitrine}
     ],
   },
 ];
