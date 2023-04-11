@@ -34,7 +34,6 @@ export default {
       selectedCategory: `womens-dresses`,
     };
   },
-
   methods: {
     goToNextPage() {
       if (this.currentPage + 1 < this.pageCount) {
@@ -202,11 +201,11 @@ export default {
       @previous-page="goToPreviousPage"
       :current-page="currentPage"
     >
-      <div class="row mx-2">
-        <button class="col btn btn-danger" @click="handleOnClickCategory" v-if="!isOpen">
+     
+        <button class="btn btn-danger" style="width:90%;margin-left:5%;" @click="handleOnClickCategory" v-if="!isOpen">
           <MenuIcon />
         </button>
-      </div>
+
     </Pagination>
   </div>
 

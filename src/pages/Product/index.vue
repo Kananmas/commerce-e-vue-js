@@ -29,13 +29,14 @@ function getRating(product) {
 }
 
 function handleClickAddToShoppingCard() {
-  let shoppingCard = JSON.parse(sessionStorage.getItem("shoppingCard"));
+  let boughtProducts = sessionStorage.getItem("shoppingCard")
+  let shoppingCard = [];
 
-  if (!shoppingCard) {
-    shoppigCard = [];
+  if (!!!boughtProducts) {
+    shoppigCard = JSON.parse(boughtProducts);
   }
 
-  shoppingCard.push(product);
+  shoppingCard.push(product.value);
   sessionStorage.setItem("shoppingCard", JSON.stringify(shoppingCard));
 }
 

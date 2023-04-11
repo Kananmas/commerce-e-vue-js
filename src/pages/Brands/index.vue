@@ -26,7 +26,7 @@ export default {
         }
     },
     methods: {
-        goToCollection(collection) {
+        goToCollection() {
             this.$router.push("/vitrine");
         }
     },
@@ -45,11 +45,11 @@ export default {
 <template>
     <div class="holder">
         <h2>BRANDS</h2>
-        <div class="row g-0">
+        <div class="row">
             <img v-if="!isSmallScreen" class="col-4 my-2 mx-2 img-holder " v-for="brand of brands" :src="brand.icon"
-                @click="goToCollection(brand.brand)" />
+                @click="goToCollection()" />
             <img v-else class="col-3 offset-1 my-2 mx-2 img-holder " v-for="brand of brands" :src="brand.icon"
-                @click="goToCollection(brand.brand)" />
+                @click="goToCollection()" />
         </div>
         <router-view></router-view>
     </div>
@@ -96,7 +96,7 @@ export default {
 
     .img-holder {
         margin: 0% 25%;
-        height: 160px;
+        height: 130px;
         width: 180px;
     }
 }
