@@ -53,6 +53,7 @@ export default {
 
 <style >
 .menu {
+    z-index:1;
     overflow-y: hidden;
     height: 103.5vh;
     background-color: white;

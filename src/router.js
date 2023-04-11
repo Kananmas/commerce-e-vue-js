@@ -9,6 +9,7 @@ import Collections from "./pages/Collections/index.vue";
 import Brands from "./pages/Brands/index.vue";
 import Product from "./pages/Product/index.vue";
 import Sales from "./pages/Sales/index.vue"
+import AboutUs from "./pages/AboutUs/index.vue"
 
 import Header from "./components/Header/index.vue";
 import Vitrine from "./components/Vitrine/index.vue";
@@ -26,8 +27,9 @@ const routes = [
       { path: "/shoppingcard", component: ShoppingCard },
       { path: "/sales", component: Sales },
       { path: "/brands", component: Brands },
-      { path: "/collections",component: Collections},
-      { path: "/vitrine", component:Vitrine}
+      { path: "/collections", component: Collections },
+      { path: "/vitrine", component: Vitrine },
+      { path: "/aboutus", component: AboutUs }
     ],
   },
 ];

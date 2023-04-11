@@ -5,7 +5,7 @@ export default {
     return {
       currentWidth: window.innerWidth,
       openMenu: false,
-      links: ["Collections", "Brands", "Sales", "New"],
+      links: ["Collections", "Brands", "Sales", "About Us"],
     };
   },
   methods: {
@@ -17,6 +17,10 @@ export default {
       if (this.currentWidth != window.innerWidth) this.currentWidth = window.innerWidth;
     },
     goToRoute(link) {
+      if(link === "About Us") {
+        link = 'aboutus'
+      }
+      
       const route = `/${link}`.toLowerCase();
 
       this.$router.push(route);
@@ -74,12 +78,13 @@ header {
   padding: 24px;
   width: 100%;
   text-align: center;
-  background-color:white;
+  background-color: white;
 }
 
 .header-container {
-    position:sticky;
-    top:0%
+  z-index: 1;
+  position: sticky;
+  top: 0%;
 }
 
 .header-icon {
